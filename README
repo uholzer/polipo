@@ -1,21 +1,29 @@
 Polipo README
 =============
 
-Polipo is single-threaded, non blocking caching web proxy that has
-very modest resource needs.  See the file INSTALL for installation
-instructions.  See the texinfo manual (available as HTML after
-installation) for more information.
+WARNING: This branch is experimental and may be rebased or deleted at
+any time!!
 
-Current information about Polipo can be found on the Polipo web page,
+Polipo is single-threaded, non blocking caching web proxy that has
+very modest resource needs.  
+
+This is a fork with caching support for negotiated resources as
+described in RFC 2616 (HTTP 1.1) and RFC 2295 (Transparent Content
+Negotiation, experimental). It is early work in progress.
+
+See the file INSTALL for installation instructions.  See the texinfo
+manual (available as HTML after installation) for more information.
+
+Questions about this fork should be directed to
+
+    Urs Holzer <urs@andonyar.com>
+
+Information about the original Polipo can be found on the Polipo web
+page and the Polipo-users mailing list:
 
     http://www.pps.jussieu.fr/~jch/software/polipo/
-
-Further inquiries should be sent to the Polipo-users mailing list:
 
     <polipo-users@lists.sourceforge.net>
 
 Please see the Polipo web page for subscription information.
 
-
-Juliusz Chroboczek
-<jch@pps.jussieu.fr>
