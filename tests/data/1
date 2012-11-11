@@ -1,0 +1,43 @@
+<testcase>
+<info>
+<keywords>
+GET
+</keywords>
+</info>
+
+<client>
+<send>
+GET %SERVER_URL/ HTTP/1.1
+Host: %SERVER_HOST
+
+</send>
+</client>
+
+<server>
+<receive>
+GET / HTTP/1.1
+Host: %SERVER_HOST
+Connection: keep-alive
+
+</receive>
+<send>
+HTTP/1.1 200 OK
+Content-Length: 13
+
+Hello world!
+</send>
+</server>
+
+<client>
+<receive>
+HTTP/1.1 200 OK
+Content-Length: 13
+Date: .*
+Connection: keep-alive
+
+Hello world!
+</receive>
+</client>
+
+</testcase>
+

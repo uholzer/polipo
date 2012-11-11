@@ -1,0 +1,40 @@
+<testcase>
+<info>
+<keywords>
+GET
+</keywords>
+</info>
+
+<client>
+<send>
+GET %SERVER_URL/ HTTP/1.1
+Host: %SERVER_HOST
+
+
+</send>
+</client>
+
+<server>
+<receive>
+GET %SERVER_URL/ HTTP/1.1
+Host: %SERVER_HOST
+
+
+</receive>
+<send>
+HTTP/1.1 200 OK
+
+
+</send>
+</server>
+
+<client>
+<receive>
+HTTP/1.1 200 OK
+
+
+</receive>
+</client>
+
+</testcase>
+
