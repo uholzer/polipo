@@ -1,0 +1,97 @@
+Polipo Test Suite
+
+This is a test suite for the Proxy server Polipo. It consists of a
+series of files describing test cases and a Python script which
+executes the tests. It simulates a conversation between a client and a
+server over a proxy. Run
+
+    ./runtests.py --help
+
+in order to find out how to run the test cases.
+
+Format of test cases
+
+The test suite's syntax is very simple and loosely ressembles XML. The
+most important difference is that line endings are kept intact. (For
+the HTTP protocol you want to use CRLF as line endings.) An element
+begins with a start tag and ends with an end tag. Elements which are
+always empty must be written with a self-closing tag. Every tag must
+be written on its own line and it must start at the beginning of the
+line. An element either contains further elements or text, but never
+both. Comments can be inserted in elements which do not contain text.
+A comment is a line starting with #.
+
+A file contains exactly one testcase. It must start with 
+
+    <testcase>
+
+Then comes an info element. It contains an optional keyword and an
+optional config element:
+
+    <info>
+    <keyword>
+    GET
+    MISSING_CONTENT_LENGTH
+    </keyword>
+    <config>
+    disableVia = false
+    </config>
+    </info>
+
+The keywords roughly describe what the testcase is about such that
+it becomes possible to search them. They have no influence on the test
+itself. Whenever possible, existing keywords should be reused. The
+content of the config element is added to Polipo's test configuration.
+(Not yet implemented.)
+
+The main part of the testcase consists of a chronological sequence of
+messages sent and received by the server and the client. Usually, the
+client is supposed to send a request first:
+
+    <client>
+    <send>
+    GET %SERVER_URL/ HTTP/1.1
+    Host: %SERVER_HOST
+    
+    </send>
+    </client>
+
+This instructs the client to send the request exactly as written in
+the send element. Next, the server should receive this request and
+send an answer. The receive element describes what the server should
+receive. If something different arrives at the server, the test case
+fails. Then it must send a response, which is described in the
+response element. It can be placed in the same server element.
+
+    <server>
+    <receive>
+    GET %SERVER_URL/ HTTP/1.1
+    Host: %SERVER_HOST
+    
+
+    </receive>
+    <send>
+    HTTP/1.1 200 OK
+    
+
+    </send>
+    </server>
+
+    Finally, the client must receive the response
+
+    <client>
+    <receive>
+    HTTP/1.1 200 OK
+    
+
+    </receive>
+    </client>
+
+The testcase element needs to be closed at the end
+
+    </testcase>
+
+While server and client run in parallel, both can do only one thing at
+the time. For example, the test will will stop at the send instruction
+for the server until it is done with receiving.
+
